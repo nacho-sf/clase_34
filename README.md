@@ -22,6 +22,7 @@ const data = [
     {name:"Corona party", info:"Cubo de 5 coronitas", price:10},
     {info:"Botella de absenta con agua", price:40,}
 ]
+
 return (
     <section>
         <ProductItem data={data[0]}/>

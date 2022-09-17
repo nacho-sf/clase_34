@@ -2,7 +2,7 @@
 
 ## REFACTORIZACIÓN 1
 
-### Guardar propuedades de componentes en un objeto:
+### Guardardado de propiedades de componentes en un objeto:
 
 Cuando se tienen muchas propiedades en los componentes, se puede crear un objeto para guardarlas aparte.
 
@@ -73,6 +73,83 @@ this.state = {
     )
   }
 }
+```
+
+## REFACTORIZACIÓN 2
+
+### Creación de un bucle que renderize cada uno de los elementos:
+
+Se le aplica al array "products" el método map para pintar cada uno de sus elementos.
+
+Se pasa de esto:
+```
+return (
+    <section>
+        <ProductItem data={products[0]}/>
+        <ProductItem data={products[1]}/>
+        <ProductItem data={products[2]}/>
+    </section>
+)
+```
+A esto otro:
+```
+return (
+    <section>
+        {products.map(product => <ProductItem data={product} />)}
+    </section>
+)
+```
+.
+### Migración del array products a un state:
+
+Esto se hace para que los datos de "products", que originalmente se ubican dentro del método "render", puedan estar accesibles desde cualquier parte de la aplicación. 
+
+Se genera un constructor en ProductList.jsx ("rconst") para migrar el array de objetos de propiedades de productos a state:
+
+Pasa de esto:
+```
+render() {
+
+const products = [
+    {name:"Tigre de Bengala",info:"Botella Moet con Bengala",price:20},
+    {name:"Corona party",info:"Cubo de 5 coronitas",price:10},
+    {info:"Botella de absenta con agua",price:40}
+]
+
+```
+
+A esto otro:
+```
+this.state = {
+      products:[
+        {name:"Tigre de Bengala",info:"Botella Moet con Bengala",price:20},
+        {name:"Corona party",info:"Cubo de 5 coronitas",price:10},
+        {info:"Botella de absenta con agua",price:40}
+      ]
+    }
+  }
+```
+.
+
+### Migración de la lógica `pintar los elementos` a la función `paintProducts`:
+
+Se pasa de esto, en render:
+```
+return (
+    <section>
+        {products.map(product => <ProductItem data={product} />)}
+    </section>
+```
+A esto otro, encima de render:
+```
+paintProducts = () => this.state.products.map(product => <ProductItem data={product} />)
+```
+Y donde estaba la lógica de la función,en render:
+```
+return (
+    <section>
+        {this.paintProducts()}
+    </section>
 ```
 
 

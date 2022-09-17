@@ -213,6 +213,40 @@ paintProducts = ()=> this.state.products.map((product, i)=> <ProductItem data={p
 
 .
 
+### Refactorización de llamada a variables dentro de objetos: DESTRUCTURACIÓN
+
+La declaración de llamadas a datos en ProductItem.jsx puede quedar con un texto más o menos largo, en función de la complejidad de la ruta por donde es llamada la variable.
+
+La sección de código donde haya HTML hayq ue intentar dejarlo lo más limpio posible.
+
+Entonces, se destructuran las variables y se pasaría de esto:
+```
+  render() {
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{this.props.data.info}</h3>
+        <p>Price: {this.props.data.price}€</p>
+      </article>
+    )
+  }
+}
+```
+A esto otro:
+```
+render() {
+    const {info,price} = this.props.data;
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+      </article>
+    )
+  }
+}
+```
+
 
 
 

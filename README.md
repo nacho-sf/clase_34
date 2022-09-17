@@ -1,6 +1,8 @@
 # Teoría clase_34
 
-## Guardar propuedades de componentes en un objeto:
+## REFACTORIZACIÓN 1
+
+### Guardar propuedades de componentes en un objeto:
 
 Cuando se tienen muchas propiedades en los componentes, se puede crear un objeto para guardarlas aparte.
 
@@ -17,7 +19,7 @@ return (
 
 A esto otro:
 ```
-const data = [
+const products = [
     {name:"Tigre de Bengala", info:"Botella Moet con Bengala", price:20},
     {name:"Corona party", info:"Cubo de 5 coronitas", price:10},
     {info:"Botella de absenta con agua", price:40,}
@@ -25,9 +27,9 @@ const data = [
 
 return (
     <section>
-        <ProductItem data={data[0]}/>
-        <ProductItem data={data[1]}/>
-        <ProductItem data={data[2]}/>
+        <ProductItem data={products[0]}/>
+        <ProductItem data={products[1]}/>
+        <ProductItem data={products[2]}/>
     </section>
 )
 ```

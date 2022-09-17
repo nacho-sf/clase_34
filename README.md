@@ -152,6 +152,16 @@ return (
     </section>
 ```
 
+### Generación de ID único por elemento:
+
+Se insala la librería "npm i uuid". Se importa en ProductList.jsx "import { v4 as uuidv4 } from 'uuid';". Entondes, en la función paintProduct se pasa de esto:
+```
+paintProducts = () => this.state.products.map(product => <ProductItem data={product} />)
+```
+A esto otro:
+```
+paintProducts = () => this.state.products.map((product, i) => <ProductItem data={product} key={uuidv4()} />)
+```
 
 
 

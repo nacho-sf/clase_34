@@ -8,6 +8,7 @@
 
 - Se RECIBE en ProductItem.jsx mediante una declaración de llamada a cada una de las propiedades que se reciban (h3{this.props.prop1}/h3...//... p{this.props.prop2}/p)
 
+.
 
 ### STATE:
 
@@ -27,6 +28,8 @@ También se pueden guardar props dentro de state:
 .
 
 ## REFACTORIZACIÓN 1
+
+.
 
 ### Guardardado de propiedades de componentes en un objeto:
 
@@ -106,6 +109,8 @@ this.state = {
 .
 
 ## REFACTORIZACIÓN 2
+
+.
 
 ### Creación de un bucle que renderize cada uno de los elementos:
 

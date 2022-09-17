@@ -1,5 +1,52 @@
 # Teoría clase_34
 
+## Guardar propuedades de componentes en un objeto:
+
+Cuando se tienen muchas propiedades en los componentes, se puede crear un objeto para guardarlas aparte.
+
+Se pasa de esto:
+```
+<section>
+    <ProductItem name={"Tigre de Bengala"} info={"Botella Moet con Bengala"} price={20}/>
+    <ProductItem name={"Corona party"} info={"Cubo de 5 Coronitas"} price={10}/>
+    <ProductItem info={"Botella de absenta con agua"} price={40}/>
+</section>
+```
+
+A esto otro:
+```
+const data = [
+    {name:"Tigre de Bengala", info:"Botella Moet con Bengala", price:20},
+    {name:"Corona party", info:"Cubo de 5 coronitas", price:10},
+    {info:"Botella de absenta con agua", price:40,}
+]
+```
+
+
+## Métodos de comunicación entre componentes padre a hijo:
+
+### PROPS:
+
+- Se ENVÍA en ProductList.jsx mediante la declaración de propiedades dentro de cada uno de los componentes hijos ("<ProductItem prop1={dato1} prop2={dato2} />")
+
+-Se RECIBE en ProductItem.jsx mediante una declaración de llamada a cada una de las propiedades que se reciban (<h3>{this.props.prop1}</h3>...//... <p>{this.props.prop2}</p>)
+
+
+### STATE:
+
+Es un atributo de la clase que se usa para guardar estados de variables.
+
+- Se CREA en ProductItem.jsx un constructor ("rconst") y se declaran los estados de variables dentro de "this.state":
+(this.state = { name1:"estado1", name2:"estado2" })
+
+También se pueden guardar props dentro de state:
+(this.state = { name1:this.props.name1, name2:this.props.name2 })
+
+
+- Se RECIBE en ProductItem.jsx mediante una declaración de llamada a cada una de los estados que se hayan declarado dentro de "this.state" (<h3>{this.state.name1}</h3>...//... <p>{this.state.name2}</p>)
+
+
+
 
 //////// MANEJO DE FORMULARIO:
 

@@ -21,8 +21,8 @@ También se pueden guardar props dentro de state:
 
 
 - Se RECIBE en ProductItem.jsx mediante una declaración de llamada a cada una de los estados que se hayan declarado dentro de "this.state" (h3{this.state.name1}/h3...//... p{this.state.name2}/p)
-
-
+.
+.
 
 ## REFACTORIZACIÓN 1
 
@@ -98,6 +98,8 @@ this.state = {
   }
 }
 ```
+.
+.
 
 ## REFACTORIZACIÓN 2
 
@@ -124,6 +126,8 @@ return (
 )
 ```
 .
+.
+
 ### Migración del array products a un state:
 
 Esto se hace para que los datos de "products", que originalmente se ubican dentro del método "render", puedan estar accesibles desde cualquier parte de la aplicación. 
@@ -154,6 +158,7 @@ this.state = {
   }
 ```
 .
+.
 
 ### Migración de la lógica `pintar los elementos` a la función `paintProducts`:
 
@@ -175,6 +180,8 @@ return (
         {this.paintProducts()}
     </section>
 ```
+.
+.
 
 ### Generación de ID único por elemento:
 
@@ -186,6 +193,7 @@ A esto otro:
 ```
 paintProducts = ()=> this.state.products.map((product, i)=> <ProductItem data={product} key={uuidv4()} />)
 ```
+.
 .
 
 

@@ -1,0 +1,19 @@
+[
+    {
+        "name":"Tigre de Bengala",
+        "info":"Botella Moet con Bengala",
+        "price":20,
+        "image":"https://reinadelafiesta.com/2458-home_default/pack-3-bengala-pastel-botella-clip-triple.jpg"
+    },
+    {
+        "name":"Corona party",
+        "info":"Cubo de 5 coronitas",
+        "price":10,
+        "image":"https://www.merchandisingplaza.es/274499/2/Fundas-Termo-Coronita-Cubo-para-cervezas-Coronita-l.jpg"
+    },
+    {
+        "info":"Botella de absenta con agua",
+        "price":40,
+        "image":"http://www.encopadebalon.com/6772-home_default/absenta-8990-verde.jpg"
+    }
+]

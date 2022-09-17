@@ -31,6 +31,7 @@ return (
     </section>
 )
 ```
+.
 
 A continuación, para acceder a las propiedades se hace en ProductItem.jsx, añadiendo a las declaraciones "this.props" la raíz "data" para indicar el objeto al que se accede:
 

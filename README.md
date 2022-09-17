@@ -247,6 +247,54 @@ render() {
 }
 ```
 
+.
+
+.
+
+### Externalización del objeto product
+
+Se crea dentro de la misma carpeta del componente ProductList un archivo llamado "products.json", y externalizamos el objeto products, situado en el state de ProductList.jsx.
+
+En products.json se importa solo el array, sin variable, y se colocan comillas en las claves:
+```
+[
+  {
+    "name":"Tigre de Bengala",
+    "info":"Botella Moet con Bengala",
+    "price":20
+  },
+  {
+    "name":"Corona party",
+    "info":"Cubo de 5 coronitas",
+    "price":10
+  },
+  {
+    "info":"Botella de absenta con agua",
+    "price":40
+  }
+]
+```
+En el archivo ProductList.jsx se importa el objeto prodicts.json:
+```
+import data from './products.json'
+```
+Y el state de ProductList.jsx se dejaría así:
+```
+constructor(props) {
+    super(props)
+  
+    this.state = {
+      products:data
+    }
+  }
+  ```
+
+.
+
+.
+
+.
+
 
 
 

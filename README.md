@@ -6,11 +6,13 @@ Cuando se tienen muchas propiedades en los componentes, se puede crear un objeto
 
 Se pasa de esto:
 ```
-<section>
-    <ProductItem name={"Tigre de Bengala"} info={"Botella Moet con Bengala"} price={20}/>
-    <ProductItem name={"Corona party"} info={"Cubo de 5 Coronitas"} price={10}/>
-    <ProductItem info={"Botella de absenta con agua"} price={40}/>
-</section>
+return (
+    <section>
+        <ProductItem name={"Tigre de Bengala"} info={"Botella Moet con Bengala"} price={20}/>
+        <ProductItem name={"Corona party"} info={"Cubo de 5 Coronitas"} price={10}/>
+        <ProductItem info={"Botella de absenta con agua"} price={40}/>
+    </section>
+)
 ```
 
 A esto otro:
@@ -20,6 +22,13 @@ const data = [
     {name:"Corona party", info:"Cubo de 5 coronitas", price:10},
     {info:"Botella de absenta con agua", price:40,}
 ]
+return (
+    <section>
+        <ProductItem data={data[0]}/>
+        <ProductItem data={data[1]}/>
+        <ProductItem data={data[2]}/>
+    </section>
+)
 ```
 
 

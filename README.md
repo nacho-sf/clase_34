@@ -32,6 +32,48 @@ return (
 )
 ```
 
+A continuación, para acceder a las propiedades se hace en ProductItem.jsx, añadiendo a las declaraciones "this.props" la raíz "data" para indicar el objeto al que se accede:
+
+Se pasa de esto:
+```
+this.state = {
+      name: this.props.name || "Producto Medias Query"
+    }
+  }
+
+  render() {
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{this.props.info}</h3>
+        <p>Price: {this.props.price}€</p>
+      </article>
+    )
+  }
+}
+```
+
+A esto otro:
+```
+this.state = {
+      name: this.props.data.name || "Producto Medias Query"
+    }
+  }
+
+  render() {
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{this.props.data.info}</h3>
+        <p>Price: {this.props.data.price}€</p>
+      </article>
+    )
+  }
+}
+```
+
+
+
 
 ## Métodos de comunicación entre componentes padre a hijo:
 

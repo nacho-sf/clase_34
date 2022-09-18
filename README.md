@@ -329,10 +329,75 @@ A esto otro:
 ```
 - Para JS "this.state.products.length!==0?" es igual que poner "this.state.products.length?"
 - En el else, en lugar de poner :"" prodría ser :null
-.
 
 .
 
+.
+
+### Añadir producto al state de productos:
+
+Nos creamos la función "addProduct", con las variables (propiedades) del producto que lo define y la variable objeto newProduct, estableciendo como claves las propiedades del producto y como valores las variables declaradas en las líneas anteriores:
+```
+addProduct = () => {
+  const name = "Coffee bomb";
+  const info = "Café con whisky y una pizca de chocolate";
+  const price = "10";
+  const newProduct = {name,info,price};
+}
+```
+El siguiente paso es meter al array products (products:data) un nuevo objeto, modificando el estado de producto, y pasándole newProduct llamando a la clave adecuada y poniéndole en nuevo valor. Esto se hará con un `spread operator`, y queda así:
+```
+addProduct = () => {
+  const name = "Coffee bomb";
+  const info = "Café con whisky y una pizca de chocolate";
+  const price = "10";
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+Ahora, se asocia la ejecución de esta función a un click de botón con el evento "onClick" en el HTML del botón declarado. Así que se crea un botón en ProductList.jsx/section y se asocia la función:
+```
+return (
+    <section>
+        <button OnClick={this.addProduct}> Añadir producto </button>
+    </section>
+```
+Cada vez que se pulse "Crear producto", se creará siempre el mismo producto. Entonces, se debería crear un formulario con sus validaciones correspondientes. Pero si se quiere probar introducir nuevos valores sin tener que crear un formilario se puede usar el método "prompt" para introducir valores por pantalla:
+```
+addProduct = () => {
+  const name = prompt("Introduce nombre");
+  const info = prompt("Introduce info del producto");
+  const price = prompt("Introduce precio");
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+
+.
+
+.
+
+### Recargar productos del state de productos:
+
+Este evento no se refiere a recargar la página desde el inicio (window.location... forzar un F5), sino volver a leer desde el array de productos en el archivo products.json y volver a recargar el state al estado inicial, que era el de los productos que encontramos en products.json
+
+Para hacer esto, habré que crear una función resetProducts que cambie el estado del array products, al estado de los productos guardados en products.json, en este caso, importado con el nombre de "data":
+```
+resetProducts = () => this.setState({products:data})
+```
+Ahora, se asocia la ejecución de esta función a un click de botón con el evento "onClick" en el HTML del botón declarado. Así que se crea un botón en ProductList.jsx/section y se asocia la función:
+```
+return (
+    <section>
+        <button OnClick={this.resetProducts}> Recargar productos </button>
+    </section>
+```
+
+.
+
+.
+
+.
 
 
 

@@ -303,11 +303,11 @@ Entontes, en state de ProductList.jsx, lo que se está haciendo es una precarga 
 
 ### Vaciado del state de productos:
 
-Ahoramismo, tenemos el estado con un array de tres elementos. Para vaciarlo, hay que conseguir que en el state, "products:data" sea "products:[]", osea, un array vacío. Esto se hará con el click de un botón, así que nos creamos la función "deleteProducts" con la lógica para hacer esto, que en esencia, será declarar un cambio de estado a un array vacío:
+Ahoramismo, tenemos el estado con un array de tres elementos. Para vaciarlo, hay que conseguir que en el state, "products:data" sea "products:[]", osea, un array vacío. Esto se hará con el click de un botón, así que nos creamos la función "deleteProducts" con la lógica para hacer esto, que en realidad, será declarar un cambio de estado a un array vacío:
 ```
 deleteProducts = () => this.setState({products:[]})
 ```
-Ahora, hay que asociar la ejecución de esta función a un click de botón con el evento "onClick" en el HTML del botón declarado. Así que se crea un botón en ProductList.jsx/sectio y se asocia la función:
+Ahora, hay que asociar la ejecución de esta función a un click de botón con el evento "onClick" en el HTML del botón declarado. Así que se crea un botón en ProductList.jsx/section y se asocia la función:
 ```
 return (
     <section>
@@ -315,7 +315,15 @@ return (
     </section>
 ```
 
+.
 
+A continuación, cuando se prueba esto vemos que se borran todos los productos. Sin embargo, vemos que no tiene sentido que el botón "Borrar productos" permanezca visible, una vez se hayan borrado estos. Entonces, refactorizamos el botón con un condicional ternario, de tal forma que si el array products es distinto de 0, entonces escríbeme el botón, pero si no, escríbeme "nada". Se pasa de esto:
+```
+<button OnClick={this.deleteProducts}> Borrar productos </button>
+```
+A esto otro:
+```
+{this.products.length!==0?}
 
 .
 

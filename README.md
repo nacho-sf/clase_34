@@ -730,7 +730,7 @@ render() {
     return (
       <article>
         <h2>{this.state.name}</h2>
-        <img src={url_img} alt={this.state.name} className="image_item" />
+        <img src={url_img} alt={this.state.name} />
         <h3>{info}</h3>
         <p>Price: {price}€</p>
         <button onClick={this.props.delete}>Borrar</button>
@@ -740,7 +740,59 @@ render() {
 }
 ```
 
+.
 
+Para los productos que tenemos almacenados en nuestro ejercicio (products.json), se le van a añadir la propiedad "image" para tener predefinida una imagen en cada producto:
+```
+[
+    {
+        "name":"Tigre de Bengala",
+        "info":"Botella Moet con Bengala",
+        "price":20,
+        "image":"https://reinadelafiesta.com/2458-home_default/pack-3-bengala-pastel-botella-clip-triple.jpg"
+    },
+    {
+        "name":"Corona party",
+        "info":"Cubo de 5 coronitas",
+        "price":10,
+        "image":"https://www.merchandisingplaza.es/274499/2/Fundas-Termo-Coronita-Cubo-para-cervezas-Coronita-l.jpg"
+    },
+    {
+        "info":"Botella de absenta con agua",
+        "price":40,
+        "image":"http://www.encopadebalon.com/6772-home_default/absenta-8990-verde.jpg"
+    }
+]
+```
+
+.
+
+Para homogeneizar el tamaño de las imágenes se le va a dar estilo en el css del componente ProductItem.jsx. Así que hay que crear una clase en el css y llamarla en la etiqueta img:
+
+En ProductItem.css:
+```
+.image_item {
+  width: 300px;
+}
+```
+Y en ProductItem.jsx, se importa el archivo css (import './ProductItem.css'), y se añade el className:
+```
+render() {
+    const {info,price,image} = this.props.data;
+    let url_img = image || "https://www.laylita.com/recetas/wp-content/uploads/2014/06/Caipirinha-o-caipiriC3B1a-de-piC3B1a-500x500.jpg";
+
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <img src={url_img} alt={this.state.name} className="image_item" />
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+        <button onClick={this.props.delete}>Borrar</button>
+      </article>
+    )
+  }
+}
+```
 
 .
 

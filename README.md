@@ -443,11 +443,12 @@ En la función "paintProducts" se declara una nueva propiedad a `<ProductItem />
 
 Pasa de esto:
 ```
-paintProducts = () => this.state.products.map((product, i) => <ProductItem data={product} key={uuidv4()} />)
+paintProducts = ()=> this.state.products.map((product, i)=> <ProductItem data={product} key={uuidv4()} />)
 ```
 A añadir la nueva propiedad:
 ```
-paintProducts = () => this.state.products.map((product, i) => <ProductItem data={product} key={uuidv4()} delete={()=>this.deleteProduct(i)}/>)
+paintProducts = ()=> this.state.products.map((product, i)=> 
+<ProductItem data={product} key={uuidv4()} delete={()=>this.deleteProduct(i)}/>)
 ```
 
 .

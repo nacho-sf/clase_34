@@ -301,7 +301,7 @@ Entontes, en state de ProductList.jsx, lo que se está haciendo es una precarga 
 
 .
 
-### Vaciado del state de productos:
+### Vaciado (borrar) del state de productos:
 
 Ahoramismo, tenemos el estado con un array de tres elementos. Para vaciarlo, hay que conseguir que en el state, "products:data" sea "products:[]", osea, un array vacío. Esto se hará con el click de un botón, así que nos creamos la función "deleteProducts" con la lógica para hacer esto, que en realidad, será declarar un cambio de estado a un array vacío:
 ```
@@ -391,6 +391,77 @@ return (
     <section>
         <button OnClick={this.resetProducts}> Recargar productos </button>
     </section>
+```
+
+.
+
+.
+
+### Borrar producto individualmente:
+
+Para que aparezca un botón asociado a cada uno de los productos, hay que crearlo en el componente ProductItem.jsx y asociarle la función que se va a crear para establecer la lógica de borrado:
+```
+render() {
+    return (
+      <article>
+        <button> Borrar </button>
+      </article>
+    )
+  }
+}
+```
+
+Sin embargo, la lógica de borrado habrá que crearla donde se encuentre el array de productos, que es en ProductList.jsx. Entonces, la función de borrado "deleteProduct" habrá que transmitirla al componente ProductItem.jsx para que en este se pueda usar. Se le pasa por "props", desde ProductList.jsx en la función "paintProducts", pero antes, hay que crear la función "deleteProduct".
+
+.
+
+Respecto a la lógica, necesito que me devuelva el array restante, tras el borrado del producto, para poder meterlo a setState. Por ello, se va a usar el método "filter". A este método se le pasaba la condición de filtrado y te devolvía el array filtrado.
+
+```
+deleteProduct = (i) => {
+  this.state.products.filter((product,j)=>...)
+}
+```
+Primero, va a filtrar por la posición "i". La "i" es la posición que va a borrar y la "j" es la posición por la que está iterando.
+```
+deleteProduct = (i) => {
+  const remainingProducts = this.state.products.filter((product,j)=> i!==j)
+}
+```
+Se escribe en la declaración que cuando "i" no sea igual a "j", te devuelva el array restante (filtrado por la condición declarada), y se guarda en la variable "remainingProducts" para segudamente pasarlo a sesState:
+```
+deleteProduct = (i) => {
+  const remainingProducts = this.state.products.filter((product,j)=> i!==j)
+  this.setState({products:remainingProducts})
+}
+```
+.
+
+Ahora, hay que transmitir la función "deleteProduct" por "props" (se pueden pasar variables, objetos, funciones...) desde ProductList.jsx (componente padre) hasta ProductItem.jsx (componente hijo)
+
+En la función "paintProducts" se declara una nueva propiedad a `<ProductItem />` con su índice correspondiente derivado del "map".
+
+Pasa de esto:
+```
+paintProducts = () => this.state.products.map((product, i) => <ProductItem data={product} key={uuidv4()} />)
+```
+A añadir la nueva propiedad:
+```
+paintProducts = () => this.state.products.map((product, i) => <ProductItem data={product} key={uuidv4()} delete={()=>this.deleteProduct(i)}/>)
+```
+
+.
+
+Entonces, en ProductItem.jsx hay que recibir a la función que se ha pasado por "props" en el botón "Borrar":
+```
+render() {
+    return (
+      <article>
+        <button onClick={this.props.delete}> Borrar </button>
+      </article>
+    )
+  }
+}
 ```
 
 .

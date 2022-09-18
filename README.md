@@ -400,10 +400,30 @@ return (
 ### Borrar producto individualmente:
 
 Para que aparezca un botón asociado a cada uno de los productos, hay que crearlo en el componente ProductItem.jsx y asociarle la función que se va a crear para establecer la lógica de borrado:
+
+Pasa de esto:
 ```
 render() {
+    const {info,price} = this.props.data;
     return (
       <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+      </article>
+    )
+  }
+}
+```
+A esto otro:
+```
+render() {
+    const {info,price} = this.props.data;
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
         <button> Borrar </button>
       </article>
     )
@@ -454,11 +474,30 @@ paintProducts = ()=> this.state.products.map((product, i)=>
 
 .
 
-Entonces, en ProductItem.jsx hay que recibir a la función que se ha pasado por "props" en el botón "Borrar":
+Entonces, en ProductItem.jsx hay que recibir a la función que se ha pasado por "props" en el botón "Borrar". Pasa de esto:
 ```
 render() {
+    const {info,price} = this.props.data;
     return (
       <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+        <button> Borrar </button>
+      </article>
+    )
+  }
+}
+```
+A esto otro:
+```
+render() {
+    const {info,price} = this.props.data;
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
         <button onClick={this.props.delete}> Borrar </button>
       </article>
     )
@@ -563,7 +602,143 @@ addProduct = (event) => {
 }
 ```
 
+.
 
+.
+
+## Referencias
+
+Las "referencias" son otra forma de transmisión de información. Te permite trabajar como con selectores, pero sin usar selectores. 
+
+Para probar esto con nuestro ejercicio, se va a añadir un nuevo campo "image" al formulario por "referencia":
+```
+return (
+  <section>
+    <form onSubmit={this.addProduct}>
+
+      <label htmlFor="name"> Nombre: </label><br />
+      <input type="text" id="name" name="name" /><br />
+
+      <label htmlFor="info"> Info :</label><br />
+      <input type="text" id="info" name="info" /><br />
+
+      <label htmlFor="price"> Precio: </label><br />
+      <input type="number" id="price" name="price" /><br />
+
+      <label htmlFor="image"> URL imágen: </label><br />
+      <input type="url" id="image" name="image" /><br />
+
+      <input type="submit" value="Añadir" />
+
+    </form>
+  </section>
+)
+```
+
+Y se crea la "referencia" en el constructor:
+```
+constructor(props) {
+    super(props)
+
+    this.image = React.createRef();
+  
+    this.state = {
+      products:data, //precarga de array de productos
+      suggestion:""
+    }
+  }
+```
+Esto permite leer el valor del input que se le ha pasado (image). Entonces, hay que añadirlo al formulario, tomando uno de los campos para leerlo a través de "referencia", siendo en este caso el input de "image":
+```
+return (
+  <section>
+    <form onSubmit={this.addProduct}>
+
+      <label htmlFor="name"> Nombre: </label><br />
+      <input type="text" id="name" name="name" /><br />
+
+      <label htmlFor="info"> Info :</label><br />
+      <input type="text" id="info" name="info" /><br />
+
+      <label htmlFor="price"> Precio: </label><br />
+      <input type="number" id="price" name="price" /><br />
+
+      <label htmlFor="image"> URL imágen: </label><br />
+      <input type="url" id="image" name="image" ref={this.image} /><br />
+
+      <input type="submit" value="Añadir" />
+
+    </form>
+  </section>
+)
+```
+Ahora, habría que leerlo. La manera en la que lo hemos hecho hasta ahora está en la función "addProduct", y sería con la declaración "const image = event.target.image.value". Pero con "referencia" es "const image = this.image.current.value" (porque en el constructor se le ha llamado "this.image").
+
+Seguidamente, hay que incluírlo en en el objeto "newProduct", y después, va a actualizar el estado, volviendo a renderizar todos los componentes con los cambios, si los hay. El código de todo lo explicado pasaría de esto:
+```
+addProduct = (event) => {
+  event.preventDefault();
+
+  const name = event.target.name.value;
+  const info = event.target.info.value;
+  const price = event.target.price.value;
+
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+A esto otro:
+```
+addProduct = (event) => {
+  event.preventDefault();
+
+  const name = event.target.name.value;
+  const info = event.target.info.value;
+  const price = event.target.price.value;
+
+  const image = this.image.current.value;
+
+  const newProduct = {name,info,price,image};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+
+.
+
+Esto último va a pasar la url de la imagen, pero no va a pintar la imagen en sí. Tenemos que en ProductList.jsx estoy pasando por "props" un array de objetos al componente ProductItem.jsx. Entonces, desde ProductItem.jsx habrá que usar el campo image que le llega por "props", añadiéndole una etiqueta img. Pasa de esto:
+```
+render() {
+    const {info,price} = this.props.data;
+
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+        <button onClick={this.props.delete}>Borrar</button>
+      </article>
+    )
+  }
+}
+```
+A esto otro:
+```
+render() {
+    const {info,price,image} = this.props.data;
+    let url_img = image || "https://www.laylita.com/recetas/wp-content/uploads/2014/06/Caipirinha-o-caipiriC3B1a-de-piC3B1a-500x500.jpg";
+
+    return (
+      <article>
+        <h2>{this.state.name}</h2>
+        <img src={url_img} alt={this.state.name} className="image_item" />
+        <h3>{info}</h3>
+        <p>Price: {price}€</p>
+        <button onClick={this.props.delete}>Borrar</button>
+      </article>
+    )
+  }
+}
+```
 
 
 

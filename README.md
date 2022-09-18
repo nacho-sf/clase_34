@@ -796,7 +796,12 @@ render() {
 
 .
 
-VÍDEO 16-09 MIN. 1:03:00
+En resumen, tenemos dos vías para el manejo de eventos en formularios:
+
+- Tradicional: Recogiendo valores con "const var = event.target.var.value".
+
+- Referencial: Recogiendo valores con "const var = this.var.current.value".
+
 
 .
 

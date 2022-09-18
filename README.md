@@ -860,7 +860,7 @@ return (
 
 Cada vez que hay un cambio en el campo input, se ejecuta la función "handleChange", que cambiará el estado de suggestion.
 
-La función "handleChange" se encarga de modificar el estado. Lee el valor actual del campo suggestion (por referencia), lo almacena en la variable "suggestion", y modifica el estado de suggestion (en state) cada vez que haya un cambio en el input (va cambiando el estado cada vez que escribo una tecla):
+La función "handleChange" se encarga de modificar el estado de suggestion. Lee el valor actual del campo suggestion (por referencia), lo almacena en la variable "suggestion", y modifica el estado de suggestion (en state) cada vez que haya un cambio en el input (va cambiando el estado cada vez que escribo una tecla):
 ```
 handleChange = () => {
     const suggestion = this.suggestion.current.value;
@@ -887,38 +887,22 @@ return (
 
 - onClick button:
 
-La función "sendMessage" se encarga de enviar el valor del input.
+La función "sendMessage", en un futuro, se encargará de enviar el valor del input. Por el momento, le declaramos un alert para comprobar que el evento onClick está ejecutando la función.
+
+También vamos a declarar código para que cada vez que se haga click, vacíe el valor del input (por referencia), y vacíe el valor del estado (por setState):
+```
+sendMessage = () => {
+    alert("Sugerencia enviada: "+this.state.suggestion);
+    this.suggestion.current.value = "";
+    this.setState({suggestion:""});
+  }
+```
+Hay que hacer ambas declaraciones porque se están guardando y transmitiendo por mecanismos diferentes.
+
+Para formularios grandes, es mejor el método tradicional que el referenciado, porque si por ejemplo se tiene un formulario con diez inputs habría que poner diez referencias en el constructor...
 
 .
 
 .
 
 .
-
-
-
-
-
-
-//////// MANEJO DE FORMULARIO:
-
-Tendremos un formulario con:
-
--Un input para indroducir valor o referenciarlo
-
--Otro input como boton para envial (type submit)
-
--Una función en form -> onSubmit, se ejecute la función "handleSubmit" (control del evento submit)
-
-
-
-
-
-/////// MANEJO DE ENVÍOS
-
-/////// REFERENCIAS
-
-Permite trabajar como cuando se usan selectores, pero sin usar selectores
-
-
-/////// ENRUTADO ENTRE PÁGINAS CON REACT

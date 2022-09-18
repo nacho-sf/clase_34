@@ -291,6 +291,32 @@ constructor(props) {
 
 .
 
+Entontes, en state de ProductList.jsx, lo que se está haciendo es una precarga de productos. Ahora, queremos pintar esos productos...
+
+.
+
+.
+
+## MANEJO DE EVENTOS
+
+.
+
+### Vaciado del state de productos:
+
+Ahoramismo, tenemos el estado con un array de tres elementos. Para vaciarlo, hay que conseguir que en el state, "products:data" sea "products:[]", osea, un array vacío. Esto se hará con el click de un botón, así que nos creamos la función "deleteProducts" con la lógica para hacer esto, que en esencia, será declarar un cambio de estado a un array vacío:
+```
+deleteProducts = () => this.setState({products:[]})
+```
+Ahora, hay que asociar la ejecución de esta función a un click de botón con el evento "onClick" en el HTML del botón declarado. Así que se crea un botón en ProductList.jsx/sectio y se asocia la función:
+```
+return (
+    <section>
+        <button OnClick={this.deleteProducts}> Borrar productos </button>
+    </section>
+```
+
+
+
 .
 
 .

@@ -846,7 +846,7 @@ return (
   <section>
     <div>
       <h1> Tus sugerencias </h1>
-      <input type="text" ref={this.suggestion} onChange={this.handleChange}/> // ---------> Como guardar el dato introducido.
+      <input type="text" ref={this.suggestion} onChange={this.handleChange}/>
       <button onClick={this.sendMessage}> Enviar </button>
     </div>
   </section>

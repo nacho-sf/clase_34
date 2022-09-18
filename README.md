@@ -538,6 +538,31 @@ addProduct = (event) => {
 }
 ```
 
+.
+
+A continuación, hay que refactorizar para leer las variables introducidas por el formulario, en logar de por el "prompt". Pasamos de esto:
+```
+addProduct = (event) => {
+  event.preventDefault();
+  const name = "Coffee bomb";
+  const info = "Café con whisky y una pizca de chocolate";
+  const price = "10";
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+A esto otro:
+```
+addProduct = (event) => {
+  event.preventDefault();
+  const name = event.target.name.value;
+  const info = event.target.info.value;
+  const price = event.target.price.value;
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+
 
 
 

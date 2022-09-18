@@ -323,7 +323,7 @@ A continuación, cuando se prueba esto vemos que se borran todos los productos. 
 ```
 A esto otro:
 ```
-{this.products.length!==0?
+{this.state.products.length!==0?
 <button onClick={this.deleteProducts}> Borrar productos </button>
 :""}
 ```

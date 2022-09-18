@@ -470,6 +470,82 @@ render() {
 
 .
 
+## CREACIÓN DE FORMULARIO
+
+A continuación, en ProductList.jsx vamos a crear un formulario con los campos de name, info y price:
+```
+return (
+  <section>
+    <form>
+
+      <label htmlFor="name"> Nombre: </label><br />
+      <input type="text" id="name" name="name" /><br />
+
+      <label htmlFor="info"> Info :</label><br />
+      <input type="text" id="info" name="info" /><br />
+
+      <label htmlFor="price"> Precio: </label><br />
+      <input type="number" id="price" name="price" /><br />
+
+      <input type="submit" value="Añadir" />
+
+    </form>
+  </section>
+)
+```
+
+Le añadimod el evento "onSubmit", para que cuando se envíe el formulario se ejecute "addProduct":
+```
+return (
+  <section>
+    <form onSubmit={this.addProduct}>
+
+      <label htmlFor="name"> Nombre: </label><br />
+      <input type="text" id="name" name="name" /><br />
+
+      <label htmlFor="info"> Info :</label><br />
+      <input type="text" id="info" name="info" /><br />
+
+      <label htmlFor="price"> Precio: </label><br />
+      <input type="number" id="price" name="price" /><br />
+
+      <input type="submit" value="Añadir" />
+
+    </form>
+  </section>
+)
+```
+
+Tal y como está el código ahora, saltarán los "prompt" para recoger los datos y hará un "reload" de la página (cada vez que se hace un "submit" se recarga toda la página). Por eso, hay que pararlo añadiendo a la función "addProduct" el evento "preventDefault". Entonces, pasa de esto:
+```
+addProduct = () => {
+  const name = "Coffee bomb";
+  const info = "Café con whisky y una pizca de chocolate";
+  const price = "10";
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+A esto otro:
+```
+addProduct = (event) => {
+  event.preventDefault();
+  const name = "Coffee bomb";
+  const info = "Café con whisky y una pizca de chocolate";
+  const price = "10";
+  const newProduct = {name,info,price};
+  this.setState({products:[newProduct,...this.state.products]})
+}
+```
+
+
+
+
+
+.
+
+.
+
 .
 
 

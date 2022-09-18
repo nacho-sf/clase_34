@@ -823,7 +823,7 @@ return (
 )
 ```
 
-Después se escribe la "referencia" en el constructor:
+Después se crea en el constructor la referencia "this.suggestion" y el estado "suggestion":
 ```
 constructor(props) {
     super(props)
@@ -832,7 +832,8 @@ constructor(props) {
     this.suggestion = React.createRef();
   
     this.state = {
-      products:data
+      products:data,
+      suggestion:""
     }
   }
 ```
@@ -855,8 +856,38 @@ return (
 
 .
 
-A continuación, se va a desarrollar la función "sendMessage":
+- onChange input:
 
+Cada vez que hay un cambio en el campo input, se ejecuta la función "handleChange", que cambiará el estado de suggestion.
+
+La función "handleChange" se encarga de modificar el estado. Lee el valor actual del campo suggestion (por referencia), lo almacena en la variable "suggestion", y modifica el estado de suggestion (en state) cada vez que haya un cambio en el input (va cambiando el estado cada vez que escribo una tecla):
+```
+handleChange = () => {
+    const suggestion = this.suggestion.current.value;
+    this.setState({suggestion});
+  }
+```
+
+.
+
+Refactorizamos el código del botón para que no se muestre cuando el campo input esté vacío, y se muestre cuando haya algo escrito:
+```
+return (
+  <section>
+    <div>
+      <h1> Tus sugerencias </h1>
+      <input type="text" ref={this.suggestion} onChange={this.handleChange}/>
+      {this.state.suggestion?<button onClick={this.sendMessage}>Enviar</button>:""}
+    </div>
+  </section>
+)
+```
+
+.
+
+- onClick button:
+
+La función "sendMessage" se encarga de enviar el valor del input.
 
 .
 

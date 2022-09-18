@@ -327,8 +327,8 @@ A esto otro:
 <button onClick={this.deleteProducts}> Borrar productos </button>
 :""}
 ```
-- Para JS "this.state.products.length!==0?" es igual que "this.state.products.length?"
-- En lugar de :"" se prodría colocar :null
+- Para JS "this.state.products.length!==0?" es igual que poner "this.state.products.length?"
+- En el else, en lugar de poner :"" prodría ser :null
 .
 
 .

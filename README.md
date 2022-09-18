@@ -796,11 +796,66 @@ render() {
 
 .
 
-En resumen, tenemos dos vías para el manejo de eventos en formularios:
+En resumen, tendríamos dos vías para el manejo de eventos en formularios:
 
 - Tradicional: Recogiendo valores con "const var = event.target.var.value".
 
 - Referencial: Recogiendo valores con "const var = this.var.current.value".
+
+.
+
+.
+
+## Manejo de eventos para un input/botón fuera de un formulario
+
+Una situación clásica sería tener un input y un botón de enviar, fuera de un formulario. Antes, en JS, se usaban selectores y eventos de escucha al botón (addEventListener) que cuando se hacía click en el botón se leía el contenido del imput y operaba de manera determinada...
+
+En React, esto se hace con "referencias". Entonces, para probar esto, primero se crean las etiquetas en ProductItem.jsx:
+```
+return (
+  <section>
+    <div>
+      <h1> Tus sugerencias </h1>
+      <input type="text" />
+      <button> Enviar </button>
+    </div>
+  </section>
+)
+```
+
+Después se escribe la "referencia" en el constructor:
+```
+constructor(props) {
+    super(props)
+
+    this.image = React.createRef();
+    this.suggestion = React.createRef();
+  
+    this.state = {
+      products:data
+    }
+  }
+```
+
+Y, de vuelta en las etiquetas, se añaden varias cosas:
+- En input, se coloca la nueva referencia "ref={this.suggestion}".
+- En input, se asocia el evento onChange a la función donde se desarrollará la lógica para cualquier cambio en el imput. La función se llamará "handleChange".
+- En button, se asocia el evento onClick a la función donde se desarrollará la lógica para cuando se haga click en el botón. La función se llamará "sendMessage".
+```
+return (
+  <section>
+    <div>
+      <h1> Tus sugerencias </h1>
+      <input type="text" ref={this.suggestion} onChange={this.handleChange}/> // ---------> Como guardar el dato introducido.
+      <button onClick={this.sendMessage}> Enviar </button>
+    </div>
+  </section>
+)
+```
+
+.
+
+A continuación, se va a desarrollar la función "sendMessage":
 
 
 .
